@@ -6,43 +6,27 @@
     <link rel="stylesheet" href="/src/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + TS</title>
+    <script type="module" src="/src/main.ts"></script>
   </head>
   <body>
-    <div id="app">
-      <h1>TypeScript Sandbox</h1>
-      <img 
-      id="foto-ppal" 
-      src="https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/venecia/portada.jpg" 
-      alt="cartel vintage de Venecia"
-      />
-      <div>
-        <img 
-        id="min1" 
-        src="https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/venecia/foto1.jpg" 
-        alt="Basílica Santa Maria della Salud, Venecia"
-        class="miniatura"
-        />
-        <img 
-        id="min2" 
-        src="https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/venecia/foto2.jpg" 
-        alt="Foto de un gran canal"
-        class="miniatura"
-        />
-        <img 
-        id="min3" 
-        src="https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/venecia/foto3.jpg" 
-        alt="Canal tradicional con góndola"
-        class="miniatura"
-        />
-        <img 
-        id="min4" 
-        src="https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/venecia/foto4.jpg" 
-        alt="Venecia por la noche"
-        class="miniatura"
-        />
+
+    <div class="container">
+      <div class="turno-display">
+        <h1 class="numero-turno" id="turno"></h1>
+        <p class="texto-turno">Por favor, acérquese al mostrador</p>     
 
       </div>
+
+      <div class="botones">
+        <button id="anterior">Anterior</button>
+        <button id="reset">Reset</button>
+        <button id="siguiente">Siguiente</button>
+      </div>
+      <div class="nuevoTurno">
+        <input type="number" id="turnoMan" placeholder="Introduce un turno" min="1">
+        <button id="enviar">Enviar</button>
+      </div>
     </div>
-    <script type="module" src="/src/main.ts"></script>
+    
   </body>
 </html>

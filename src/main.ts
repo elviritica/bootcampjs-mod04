@@ -1,40 +1,63 @@
 import "./style.css";
 
-function cambiarFotoPpal(idMiniatura : string) : void{
-    
-    const fotoPpal  = document.getElementById("foto-ppal"); // as HTMLImageElement tb serviría en lugar del instance of
-    const miniatura = document.getElementById(idMiniatura);
+let numActual : number = 1;
+let turno : HTMLElement | null = document.getElementById("turno");
+let turnoManual : HTMLInputElement | null = document.getElementById("turnoMan") as HTMLInputElement;
 
-    if ( fotoPpal !== null && fotoPpal !== undefined &&
-        miniatura !== null && miniatura !== undefined){
-            if (fotoPpal instanceof HTMLImageElement && 
-                miniatura instanceof HTMLImageElement) {
-                    fotoPpal.src = miniatura.src;
-                    fotoPpal.alt = miniatura.alt;
-            }
+const botonSiguiente = document.getElementById("siguiente");
+const botonReset = document.getElementById("reset");
+const botonAnterior = document.getElementById("anterior");
+const botonEnviar = document.getElementById("enviar");
 
-        }
+function actTurno() : void {
+    if(turno !== null && turno !== undefined){
+        turno.innerText = numActual.toString().padStart(2, "0");
+    }
 }
 
-const min1 = document.getElementById("min1");
-const min2 = document.getElementById("min2");
-const min3 = document.getElementById("min3");
-const min4 = document.getElementById("min4");
+function turnoSiguiente() : void {
+    numActual++;
+    actTurno();
+};
 
-if( min1 !== null && min1 !== undefined &&
-    min2 !== null && min1 !== undefined &&
-    min3 !== null && min1 !== undefined &&
-    min4 !== null && min1 !== undefined) 
-    {
-        min1.addEventListener("click", () => cambiarFotoPpal("min1"));
+function turnoReset() : void {
+    numActual = 1;
+    actTurno();
+};
 
-        min2.addEventListener("click", function(){
-            cambiarFotoPpal("min2");
-        })
+function turnoAnterior() : void {
+    if (numActual > 1) {
+        numActual--;
+        actTurno();
+    }
+};
 
-        min3.addEventListener("click", function(){
-            cambiarFotoPpal("min3");
-        })
+function enviarTurnoManual () : void{
+    if (turnoManual !== null ) {
+        const nuevoTurno = parseInt(turnoManual.value, 10);
+        if (nuevoTurno > 1) {
+            numActual = nuevoTurno;
+            actTurno();
 
-        min4.addEventListener("click", () => cambiarFotoPpal("min4"))
-    };
+            turnoManual.value = "";
+        }
+    }
+}
+
+if (botonSiguiente !== null && botonSiguiente !== undefined) {
+    botonSiguiente.addEventListener("click", () => turnoSiguiente());
+}
+
+if (botonReset !== null && botonReset !== undefined) {
+    botonReset.addEventListener("click", () => turnoReset());
+}
+
+if (botonAnterior !== null && botonAnterior !== undefined) {
+    botonAnterior.addEventListener("click", () => turnoAnterior());
+}
+
+if (botonEnviar !== null && botonEnviar !== undefined) {
+    botonEnviar.addEventListener("click", () => enviarTurnoManual());
+}
+
+actTurno();
